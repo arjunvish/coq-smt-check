@@ -135,34 +135,44 @@ struct
    *       let contrib_name = "smt-check-real-instance"
    *     end) *)
 
-  let resolve (tm : string) : GlobRef.t Lazy.t =
-    lazy (Coqlib.lib_ref tm)
-
-  let r_real s = resolve ("Coq.Reals.Rdefinitions." ^ s)
-  let r_logic s = resolve ("Coq.Init.Logic." ^ s)
-
-  let c_R = r_real "R"
-  let c_0 = r_real "R0"
-  let c_1 = r_real "R1"
-  let c_Rplus = r_real "Rplus"
-  let c_Rminus = r_real "Rminus"
-  let c_Rdiv = r_real "Rdiv"
-  let c_Rmult = r_real "Rmult"
-  let c_Ropp = r_real "Ropp"
-  let c_Rinv = r_real "Rinv"
-
-  let c_Rlt = r_real "Rlt"
-  let c_Rle = r_real "Rle"
-  let c_Rgt = r_real "Rgt"
-  let c_Rge = r_real "Rge"
-
-  let c_and = r_logic "and"
-  let c_or = r_logic "or"
-  let c_True = r_logic "True"
-  let c_False = r_logic "False"
-  let c_Not = r_logic "not"
-  let c_eq = r_logic "eq"
-  (* let c_Prop = Constr.mkProp *)
+  (*Names.GlobRef.type t =
+    | VarRef of variable	        A reference to the section-context.
+    | ConstRef of Constant.t	    A reference to the environment.
+    | IndRef of inductive	        A reference to an inductive type.
+    | ConstructRef of constructor	A reference to a constructor of an inductive type.*)
+    let resolve (tm : string) : GlobRef.t Lazy.t =
+      lazy (Coqlib.lib_ref tm)
+    (* val lib_ref : string -> Names.GlobRef.t
+       Retrieves the reference bound to the given name 
+       (by a previous call to `register_ref x y`/`Register x as y`  ).*)
+  
+    (* These two functions resolve symbols from Rdefinitions and Logic *)
+    let r_real s = resolve ("reals.R." ^ s)
+    let r_logic s = resolve ("core." ^ s ^ ".type")
+  
+    (* The following are the global references for the Coq symbol in the string *)
+    let c_R = r_real "type"
+    let c_0 = r_real "R0"
+    let c_1 = r_real "R1"
+    let c_Rplus = r_real "Rplus"
+    let c_Rminus = r_real "Rminus"
+    let c_Rdiv = r_real "Rdiv"
+    let c_Rmult = r_real "Rmult"
+    let c_Ropp = r_real "Ropp"
+    let c_Rinv = r_real "Rinv"
+  
+    let c_Rlt = r_real "Rlt"
+    let c_Rle = r_real "Rle"
+    let c_Rgt = r_real "Rgt"
+    let c_Rge = r_real "Rge"
+  
+    let c_and = r_logic "and"
+    let c_or = r_logic "or"
+    let c_True = r_logic "True"
+    let c_False = r_logic "False"
+    let c_Not = r_logic "not"
+    let c_eq = r_logic "eq"
+    (* let c_Prop = Constr.mkProp *)
 
   module EConstrOrd =
   struct

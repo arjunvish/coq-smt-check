@@ -2,6 +2,8 @@ Require Import SMTC.Tactic.
 Require Import Coq.Strings.String.
 Require Import Coq.Reals.Rdefinitions.
 Require Import Coq.Reals.RIneq.
+Require Import Coq.Reals.Rregisternames.
+Require Import Coq.Init.Logic.
 
 Set SMT Solver "z3".
 Set SMT Debug.
